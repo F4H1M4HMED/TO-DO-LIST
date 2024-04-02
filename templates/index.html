@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center; /* Center content */
+            background-color: beige;
+        }
+        .container {
+            width: 800px;
+            margin: auto;
+            margin-top: 20px;
+            background-color: rgb(96, 176, 207);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Style for the ordered list */
+        ul {
+            list-style-type: disc;  /* Ensure items are numbered */
+            padding-left: 40px; /* Add padding to make sure numbers are visible */
+        }
+
+        /* Style for list items */
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        /* Style for links */
+        li a {
+            text-decoration: none;
+            color: aliceblue;
+            padding: 5px;
+            border-radius: 10px;
+            font-weight: bold;
+            background-color: black;
+        }
+
+        /* Specific style for the "Remove" link */
+        .remove-link {
+            background-color: red;
+            color: white; /* Ensures text is white for better readability */
+        }
+
+        /* Style for the form */
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Add some space below the form */
+        }
+
+        /* Style for the input box */
+        input[type="text"] {
+            width: 60%; /* Adjust width as needed */
+            height: 40px; /* Larger height for better visibility */
+            margin-right: 10px; /* Space between the input box and the button */
+        }
+
+        /* Style for the button */
+        button[type="submit"] {
+            width: 150px;
+            height: 46px; /* Adjust height to match the input box */
+            background-color: white;
+            color: black;
+            border: 1px solid black; /* Add border to match the input box style */
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My To-Do List</h2>
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <button type="submit">Add Task</button>
+        </form>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    {{ task }}
+                    <a href="/remove/{{ loop.index0 }}" class="remove-link">Remove</a>
+                    <a href="/move_up/{{ loop.index0 }}">Move Up</a>
+                    <a href="/move_down/{{ loop.index0 }}">Move Down</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
